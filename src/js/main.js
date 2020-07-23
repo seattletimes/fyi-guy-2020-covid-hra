@@ -12,7 +12,7 @@ var ich = require("icanhaz");
 var templateFile = require("./_popup.html");
 ich.addTemplate("popup", templateFile);
 
-var data = require("./take6.geo.json");
+var data = require("./take7.geo.json");
 
 // var data = require("./map-fyi.geo.json");
 
@@ -31,48 +31,48 @@ var mapElement = document.querySelector("leaflet-map");
 
   var focused = false;
 
-  var deaths = "covid_Deaths";
-  var cases = "covid_Positive_Tests";
-  var tests = "covid_Test_Rate";
-  var tests_pos = "covid_Positive_Test_Rate";
+  var deaths = "DeathRate_100";
+  // var cases = "covid_Positive_Tests";
+  var tests = "TestRate_100";
+  var tests_pos = "Pos_test_per";
 
-  var covid_Deaths_array = [10,20,30,40];
-  var covid_Positive_Tests_array  = [100,200,300,400];
-  var covid_Test_Rate_array  = [8000, 10000, 12000, 14000];
-  var covid_Positive_Test_Rate_array  = [300,600,900,1200];
+  var DeathRate_100_array = [10,20,30,40];
+  // var covid_Positive_Tests_array  = [100,200,300,400];
+  var TestRate_100_array  = [8000, 10000, 12000, 14000];
+  var Pos_test_per_array  = [300,600,900,1200];
 
   var arrayLegend = {
-    covid_Deaths_array: covid_Deaths_array,
-    covid_Positive_Tests_array: covid_Positive_Tests_array,
-    covid_Test_Rate_array: covid_Test_Rate_array,
-    covid_Positive_Test_Rate_array: covid_Positive_Test_Rate_array,
+    DeathRate_100_array: DeathRate_100_array,
+    // covid_Positive_Tests_array: covid_Positive_Tests_array,
+    TestRate_100_array: TestRate_100_array,
+    Pos_test_per_array: Pos_test_per_array,
     deaths: deaths,
-    cases: cases,
+    // cases: cases,
     tests: tests,
     tests_pos: tests_pos
   };
 
   var commafy = s => (s * 1).toLocaleString().replace(/\.0+$/, "");
 
-  // data.features.forEach(function(f) {
-  //   ["percent", "single", "joint"].forEach(function(prop) {
-  //     f.properties[prop] = (f.properties[prop] * 100).toFixed(1);
-  //   });
-  //   ["returns"].forEach(function(prop) {
-  //     f.properties[prop] = commafy ((f.properties[prop]));
-  //   });
-  // });
+  data.features.forEach(function(f) {
+    // ["percent", "single", "joint"].forEach(function(prop) {
+    //   f.properties[prop] = (f.properties[prop] * 100).toFixed(1);
+    // });
+    ["TestRate_100", "Population", "Tests"].forEach(function(prop) {
+      f.properties[prop] = commafy ((f.properties[prop]));
+    });
+  });
 
 
   var onEachFeature = function(feature, layer) {
     layer.bindPopup(ich.popup(feature.properties))
     layer.on({
       mouseover: function(e) {
-        layer.setStyle({ weight: 2, fillOpacity: .8 });
+        layer.setStyle({ weight: 2, fillOpacity: 1 });
       },
       mouseout: function(e) {
         if (focused && focused == layer) { return }
-        layer.setStyle({ weight: 1, fillOpacity: 1 });
+        layer.setStyle({ weight: 1, fillOpacity: 0.7 });
       }
     });
   };
@@ -124,7 +124,7 @@ var mapElement = document.querySelector("leaflet-map");
             fillColor: myFillColor,
             opacity: .25,
             color: '#000',
-            fillOpacity: 1,
+            fillOpacity: 0.7,
             weight: 1
         });
     });
@@ -143,7 +143,12 @@ var onEachFeature = function(feature, layer) {
 
  map.scrollWheelZoom.disable();
 
+
+
  var filterMarkers = function(clickedID) {
+   if (clickedID === "tests_pos") {
+     lastColor.style.display = "none";
+   } else { lastColor.style.display = "inline-block"; }
    hideSpans();
    var chosenSpans = legendContainer.getElementsByClassName(clickedID);
    showSpans(chosenSpans);
@@ -162,6 +167,7 @@ var onEachFeature = function(feature, layer) {
  var filterButtons = document.getElementsByClassName("button");
  var legendContainer = document.getElementById("legendCon");
  var allSpans = legendContainer.getElementsByTagName('span');
+ var lastColor = document.getElementById("last");
 
  var hideSpans = function() {
    for (var i = 0; i < allSpans.length; i++) {

@@ -10,12 +10,18 @@
   <div class="credit">Corinne Chin / The Seattle Times</div>
 {{/image}}
 -->
-<h2 class="bigheader">{{ covid_Location_Name }}</h2>
+<h2 class="bigheader">{{ Location_Name }}</h2>
 
-<div class="score"><b>Test rate per 100,000: {{ covid_Test_Rate }}</b></div>
-<div class="score"><b>Positive test rate per 100,000: {{ covid_Positive_Test_Rate }}</b></div>
-<div class="score"><b>Total number of positive tests: {{ covid_Positive_Tests }}</b></div>
-<div class="score"><b>Total number of COVID-related deaths: {{ covid_Deaths }}</b></div>
+<div class="score">Percent of tests which have been positive: <b>{{ Pos_test_per }}</b></div>
+
+<div class="score">Test rate per 100,000 residents: <b>{{ TestRate_100 }}</b></div>
+<div class="score">COVID-related deaths per 100,000 residents: <b>{{ DeathRate_100 }}</b></div>
+
+
+<div class="score">Total number of residents: <b>{{ Population }}</b></div>
+<div class="score">Total number of COVID tests taken: <b>{{ Tests }}</b></div>
+<div class="score">Total number of COVID-positive tests: <b>{{ Positives }}</b></div>
+<div class="score">Total number of COVID-related deaths: <b>{{ Deaths }}</b></div>
 
 <!--   {{#link}}
   <div class="note"><a href="{{link}}" target="_blank"><em>(Source)</em></a></div>
