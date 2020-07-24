@@ -12,12 +12,17 @@
     <% if (json.project.production && !json.project.embedded) { %>
       <%= t.include("partials/_gtmNoScript.html") %>
     <% } %>
-    <responsive-child>
+    <responsive-child class="interactive">
+
+      <div class="graphic-hed">COVID-19 rates vary across King County</div>
+
+      <div class="graphic-chatter">In King County, the highest percentage of positive tests for COVID-19 are in South County.
+        The highest rates of death, based on total population, are in Shoreline and parts of the Eastside.</div>
       <!-- content goes here -->
       <div class="buttonCon">
         <!-- <div id="cases" class="button">Total cases</div> -->
         <div id="tests_pos" class="button">Percent of tests that were positive</div>
-        <div id="deaths" class="button">Deaths per 100,000 residents</div>  
+        <div id="deaths" class="button">Deaths per 100,000 residents</div>
         <div id="tests" class="button">Tests per 100,000 residents</div>
       </div>
 
@@ -25,51 +30,51 @@
         <div class="legend">
           <div class="color" style="background-color:#FAE2C1;"></div>
           <div class="number">
-            <span class="tests">6,000 - 7,999 tests per 100,000 residents</span>
-            <span class="deaths">0 - 9 deaths</span>
+            <span class="tests">7,000 - 8,999 tests</span>
+            <span class="deaths">0 - 19 deaths</span>
             <!-- <span class="cases">0 - 99 cases</span> -->
-            <span class="tests_pos">0 - 299 positive cases per 100,000 residents</span>
+            <span class="tests_pos">0 - 2.9 %</span>
           </div>
         </div>
         <div class="legend">
           <div class="color" style="background-color:#F4BD6E;"></div>
           <div class="number">
-            <span class="tests">8,000 - 9,999 tests per 100,000 residents</span>
-            <span class="deaths">10 - 19 deaths</span>
+            <span class="tests">9,000 - 10,999 tests</span>
+            <span class="deaths">20 - 39 deaths</span>
             <!-- <span class="cases">100 - 199 cases</span> -->
-            <span class="tests_pos">300 - 599 positive cases per 100,000 residents</span>
+            <span class="tests_pos">3.0 - 5.9 %</span>
           </div>
         </div>
         <div class="legend">
           <div class="color" style="background-color:#ED8A52;"></div>
           <div class="number">
-            <span class="tests">10,000 - 11,999 tests per 100,000 residents</span>
-            <span class="deaths">20 - 29</span>
+            <span class="tests">11,000 - 12,999 tests</span>
+            <span class="deaths">40 - 59 deaths</span>
             <!-- <span class="cases">200 - 299</span> -->
-            <span class="tests_pos">600 - 899 positive cases per 100,000 residents</span>
+            <span class="tests_pos">6.0 - 8.9 %</span>
           </div>
         </div>
         <div class="legend">
           <div class="color" style="background-color:#E34D32;"></div>
           <div class="number">
-            <span class="tests">12,000 - 13,999 tests per 100,000 residents</span>
-            <span class="deaths">30 - 39 deaths</span>
+            <span class="tests">13,000 - 14,999 tests</span>
+            <span class="deaths">60 - 79 deaths</span>
             <!-- <span class="cases">300 - 399 cases</span> -->
-            <span class="tests_pos">900 - 1,199 positive cases per 100,000 residents</span>
+            <span class="tests_pos">9 - 11.9 %</span>
           </div>
         </div>
         <div class="legend">
           <div id="last" class="color" style="background-color:#B22118;"></div>
           <div class="number">
-            <span class="tests">14,000 + tests per 100,000 residents</span>
-            <span class="deaths">40 + deaths</span>
+            <span class="tests">15,000 + tests</span>
+            <span class="deaths">80 + deaths</span>
             <!-- <span class="cases">400 + cases</span> -->
-            <!-- <span class="tests_pos">1,200 + positive cases per 100,000 residents</span> -->
+            <span class="tests_pos">12 % + </span>
           </div>
         </div>
       </div>
 
-      <div class="aspect-ratio-outer">
+      <div id="map" class="aspect-ratio-outer">
         <div class="aspect-ratio-inner">
 
           <leaflet-map zoom=9>
@@ -80,7 +85,7 @@
       </div>
 
       <figcaption class="source-container">
-          <p class="data-source">Source: XXX</p>
+          <p class="data-source">Source: Public Health - Seattle & King County. Data from July 22, 2020.</p>
           <p class="art-credit">Lauren Flannery / The Seattle Times</p>
         </figcaption>
 

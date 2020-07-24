@@ -20,14 +20,14 @@ var data = require("./take7.geo.json");
 
 var mapElement = document.querySelector("leaflet-map");
 
-
+  var zoomLevel = (document.getElementById("map").offsetWidth > 500) ? 9 : 8;
 
   var L = mapElement.leaflet;
   var map = mapElement.map;
 
   map.scrollWheelZoom.disable();
 
-  map.setView(new L.LatLng(47.4800, -121.8), 9);
+  map.setView(new L.LatLng(47.4200, -121.8), zoomLevel);
 
   var focused = false;
 
@@ -36,10 +36,10 @@ var mapElement = document.querySelector("leaflet-map");
   var tests = "TestRate_100";
   var tests_pos = "Pos_test_per";
 
-  var DeathRate_100_array = [10,20,30,40];
+  var DeathRate_100_array = [20,40,60,80];
   // var covid_Positive_Tests_array  = [100,200,300,400];
-  var TestRate_100_array  = [8000, 10000, 12000, 14000];
-  var Pos_test_per_array  = [300,600,900,1200];
+  var TestRate_100_array  = [9000, 11000, 13000, 15000];
+  var Pos_test_per_array  = [3,6,9,12];
 
   var arrayLegend = {
     DeathRate_100_array: DeathRate_100_array,
@@ -60,6 +60,13 @@ var mapElement = document.querySelector("leaflet-map");
     // });
     ["TestRate_100", "Population", "Tests"].forEach(function(prop) {
       f.properties[prop] = commafy ((f.properties[prop]));
+    });
+
+    ["Pos_test_per"].forEach(function(prop) {
+      var number = f.properties[prop] * 100;
+      var rounded = Math.round(number * 10) / 10;
+
+      f.properties[prop] = rounded;
     });
   });
 
@@ -130,9 +137,9 @@ var mapElement = document.querySelector("leaflet-map");
     });
 }
 
-restyleLayer(deaths);
+restyleLayer(tests_pos);
 
-const startSel = document.getElementById("deaths");
+const startSel = document.getElementById("tests_pos");
 startSel.classList.add("active");
 
 
@@ -146,9 +153,9 @@ var onEachFeature = function(feature, layer) {
 
 
  var filterMarkers = function(clickedID) {
-   if (clickedID === "tests_pos") {
-     lastColor.style.display = "none";
-   } else { lastColor.style.display = "inline-block"; }
+   // if (clickedID === "tests_pos") {
+   //   lastColor.style.display = "none";
+   // } else { lastColor.style.display = "inline-block"; }
    hideSpans();
    var chosenSpans = legendContainer.getElementsByClassName(clickedID);
    showSpans(chosenSpans);
@@ -183,9 +190,9 @@ var onEachFeature = function(feature, layer) {
 
 
 hideSpans();
-var deathSpans = legendContainer.getElementsByClassName('deaths');
+var tests_posSpans = legendContainer.getElementsByClassName('tests_pos');
 
-showSpans(deathSpans);
+showSpans(tests_posSpans);
 
 
  for (var i = 0; i < filterButtons.length; i++) {
