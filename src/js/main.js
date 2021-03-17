@@ -12,7 +12,7 @@ var ich = require("icanhaz");
 var templateFile = require("./_popup.html");
 ich.addTemplate("popup", templateFile);
 
-var data = require("./take7.geo.json");
+var data = require("./LaurenExport.geo.json");
 
 // var data = require("./map-fyi.geo.json");
 
@@ -39,7 +39,7 @@ var mapElement = document.querySelector("leaflet-map");
   var DeathRate_100_array = [20,40,60,80];
   // var covid_Positive_Tests_array  = [100,200,300,400];
   var TestRate_100_array  = [9000, 11000, 13000, 15000];
-  var Pos_test_per_array  = [3,6,9,12];
+  var Pos_test_per_array  = [-50,-25,-0.1,0.1,25,50,75];
 
   var arrayLegend = {
     DeathRate_100_array: DeathRate_100_array,
@@ -97,6 +97,7 @@ var mapElement = document.querySelector("leaflet-map");
     if (typeof value != "undefined") {
       // condition ? if-true : if-false;
      return value >= thisArray[3] ? '#B22118' :
+            value >= thisArray[3] ? '#B22118' :
      		    value >= thisArray[2] ? '#E34D32' :
             value >= thisArray[1] ? '#ED8A52' :
             value >= thisArray[0]  ? '#F4BD6E' :
